@@ -1,7 +1,8 @@
 const port = 3000;
 
 const { createApp } = require('@unleash/proxy');
-const express = require('express')
+const express = require('express');
+const RegionalRolloutStrategy = require('./regionalRollout');
 const expressApp = express();
 
 const app = createApp({
@@ -10,6 +11,7 @@ const app = createApp({
     clientKeys: ['clientKey1'],
     proxyPort: 3000,
     refreshInterval: 1000,
+    customStrategies: [new RegionalRolloutStrategy()]
 }, undefined, expressApp);
 
 app.listen(port, () =>
